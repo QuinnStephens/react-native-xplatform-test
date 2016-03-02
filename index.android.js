@@ -9,6 +9,7 @@ var {
   ToolbarAndroid,
   View,
   Text,
+  Component
 } = React;
 
 var SearchPage = require('./SearchPage');
@@ -29,7 +30,7 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
   );
 };
 
-class PropertyFinderApp extends React.Component {
+class PropertyFinder extends Component {
   render() {
     return (
       <Navigator 
@@ -52,4 +53,4 @@ var styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('PropertyFinder', function() { return PropertyFinderApp });
+AppRegistry.registerComponent('PropertyFinder', function() { return PropertyFinder });

@@ -3,50 +3,39 @@
  * https://github.com/facebook/react-native
  */
 'use strict';
-import React, {
+var React = require('react-native');
+var {
   AppRegistry,
-  Component,
+  Navigator,
   StyleSheet,
+  View,
   Text,
-  View
-} from 'react-native';
+  Component
+} = React;
+
+var SearchPage = require('./SearchPage');
+
+var RouteMapper = function(route, navigationOperations, onComponentRef) {
+  return (
+    <SearchPage navigator={navigationOperations} />
+  );
+};
 
 class PropertyFinder extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <Navigator 
+        style={styles.container}
+        initialRoute={{title: 'Property Finder'}}
+        renderScene={RouteMapper}/>
     );
   }
 }
 
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
 
 AppRegistry.registerComponent('PropertyFinder', () => PropertyFinder);
