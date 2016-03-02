@@ -38,12 +38,32 @@ class SearchPage extends Component {
     this.state = { 
       searchString: 'Temuco',
       isLoading: false,
+      message: '',
     };
   }
 
   _executeQuery(query) {
     console.log(query);
     this.setState({ isLoading: true });
+
+    fetch(query)
+      .then(response => response.json())
+      .then(json => this._handleResponse(json.response))
+      .catch(error => 
+        this.setState({
+          isLoading: false,
+          message: 'Oh noes! ' + error,
+        }));
+  }
+
+  _handleResponse(response) {
+    this.setState({ isLoading: false, message: ''});
+    if (response.application_response_code.substr(0, 1) === '1') {
+      this.setState({ message: 'Properties found: ' + response.listings.length });
+    }
+    else {
+      this.setState({ message: 'Location not recognized. Please try again!' });
+    }
   }
 
   onSearchTextChanged(event) {
@@ -92,6 +112,7 @@ class SearchPage extends Component {
         </TouchableHighlight>
         <Image source={require('image!house')} style={styles.image}/> 
         {spinner}
+        <Text style={styles.description}>{this.state.message}</Text>
       </View>
     );
   }
