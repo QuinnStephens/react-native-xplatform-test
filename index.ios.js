@@ -7,10 +7,7 @@ var React = require('react-native');
 var {
   AppRegistry,
   Navigator,
-  StyleSheet,
-  View,
-  Text,
-  Component
+  Component,
 } = React;
 
 var RouteMapper = require('./RouteMapper');
@@ -19,7 +16,6 @@ class PropertyFinder extends Component {
   render() {
     return (
       <Navigator 
-        style={styles.container}
         initialRoute={{
           title: 'Property Finder',
           name: 'search',
@@ -28,11 +24,5 @@ class PropertyFinder extends Component {
     );
   }
 }
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-});
 
 AppRegistry.registerComponent('PropertyFinder', () => PropertyFinder);
