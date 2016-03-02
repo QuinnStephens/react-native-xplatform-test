@@ -13,20 +13,17 @@ var {
   Component
 } = React;
 
-var SearchPage = require('./SearchPage');
-
-var RouteMapper = function(route, navigationOperations, onComponentRef) {
-  return (
-    <SearchPage navigator={navigationOperations} />
-  );
-};
+var RouteMapper = require('./RouteMapper');
 
 class PropertyFinder extends Component {
   render() {
     return (
       <Navigator 
         style={styles.container}
-        initialRoute={{title: 'Property Finder'}}
+        initialRoute={{
+          title: 'Property Finder',
+          name: 'search',
+        }}
         renderScene={RouteMapper}/>
     );
   }

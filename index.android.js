@@ -12,30 +12,17 @@ var {
   Component
 } = React;
 
-var SearchPage = require('./SearchPage');
-
-var _navigator;
-BackAndroid.addEventListener('hardwareBackPress', () => {
-  if (_navigator && _navigator.getCurrentRoutes().length > 1) {
-    _navigator.pop();
-    return true;
-  }
-  return false;
-});
-
-var RouteMapper = function(route, navigationOperations, onComponentRef) {
-  _navigator = navigationOperations;
-  return (
-    <SearchPage navigator={navigationOperations} />
-  );
-};
+var RouteMapper = require('./RouteMapper');
 
 class PropertyFinder extends Component {
   render() {
     return (
       <Navigator 
         style={styles.container}
-        initialRoute={{title: 'Property Finder'}}
+        initialRoute={{
+          title: 'Property Finder',
+          name: 'search',
+        }}
         renderScene={RouteMapper}/>
     );
   }
