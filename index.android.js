@@ -3,22 +3,14 @@
 var React = require('react-native');
 var {
   AppRegistry,
-  Navigator,
   Component,
 } = React;
 
-var RouteMapper = require('./RouteMapper');
+var PropertyNavigator = require('./PropertyNavigator');
 
 class PropertyFinder extends Component {
   render() {
-    return (
-      <Navigator 
-        initialRoute={{
-          title: 'Property Finder',
-          name: 'search',
-        }}
-        renderScene={RouteMapper}/>
-    );
+    return PropertyNavigator();
   }
 }
 

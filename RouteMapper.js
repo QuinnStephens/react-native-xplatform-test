@@ -7,6 +7,7 @@ var {
   Navigator,
   StyleSheet,
   ToolbarAndroid,
+  TouchableHighlight,
   View,
 } = React;
 
@@ -34,27 +35,9 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
       return (
         <SearchResults 
         navigator={navigationOperations}
-        listings={route.listings}
-        onForward={() => {
-          var nextIndex = route.index + 1;
-          _navigator.push({
-            name: 'Scene ' + nextIndex,
-            index: nextIndex,
-          });
-        }}
-        onBack={() => {
-          if (route.index > 0) {
-            _navigator.pop();
-          }
-        }} />
+        listings={route.listings} />
       );
   }
 };
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-});
 
 module.exports = RouteMapper;
