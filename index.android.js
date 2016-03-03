@@ -10,8 +10,8 @@ var PropertyNavigator = require('./PropertyNavigator');
 
 class PropertyFinder extends Component {
   render() {
-    return PropertyNavigator();
+    return <PropertyNavigator/>
   }
 }
 
-AppRegistry.registerComponent('PropertyFinder', function() { return PropertyFinder });
+AppRegistry.registerComponent('PropertyFinder', () => PropertyFinder);
