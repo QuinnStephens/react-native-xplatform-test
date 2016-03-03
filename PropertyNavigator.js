@@ -4,46 +4,77 @@ var {
   BackAndroid,
   Component,
   Navigator,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableHighlight,
+  TouchableOpacity,
 } = React;
 
 var RouteMapper = require('./RouteMapper');
 
-var NavigationBarRouteMapper = {
-  LeftButton: function(route, navigator, index, navState) {
-    return (<TouchableHighlight style={{marginTop: 30}} onPress = {() => {
-      if (index > 0) {
-        navigator.pop();
-      }
-    }}>
-      <Text>Back</Text>
+var cssVar = require('cssVar');
+
+class NavButton extends React.Component {
+  render() {
+    return (
+      <TouchableHighlight
+        style={styles.button}
+        underlayColor="#B5B5B5"
+        onPress={this.props.onPress}>
+        <Text style={styles.buttonText}>{this.props.text}</Text>
       </TouchableHighlight>
-    )
+    );
+  }
+}
+
+var NavigationBarRouteMapper = {
+
+  LeftButton: function(route, navigator, index, navState) {
+    if (index === 0) {
+      return null;
+    }
+
+    var previousRoute = navState.routeStack[index - 1];
+    return (
+      <TouchableOpacity
+        onPress={() => navigator.pop()}
+        style={styles.navBarLeftButton}>
+        <Text style={[styles.navBarText, styles.navBarButtonText]}>
+          {previousRoute.title}
+        </Text>
+      </TouchableOpacity>
+    );
   },
 
   RightButton: function(route, navigator, index, navState) {
-    return null;
+    return null; 
+    //(
+      // <TouchableOpacity
+      //   onPress={() => navigator.push(newRandomRoute())}
+      //   style={styles.navBarRightButton}>
+      //   <Text style={[styles.navBarText, styles.navBarButtonText]}>
+      //     Next
+      //   </Text>
+      // </TouchableOpacity>
+    // );
   },
 
   Title: function(route, navigator, index, navState) {
     return (
-      <Text>
-        {route.title}
+      <Text style={[styles.navBarText, styles.navBarTitleText]}>
+        {route.title} [{index}]
       </Text>
-      );
+    );
   },
-}
 
-class PropertyNavBar extends Navigator.NavigationBar {
-  
-}
+};
 
 class PropertyNavigator extends Component {
   render() {
     return (
-      <Navigator 
+      <Navigator
+        debugOverlay={false}
         style={styles.container}
         initialRoute={{
           title: 'Property Finder',
@@ -51,9 +82,13 @@ class PropertyNavigator extends Component {
         }}
         renderScene={RouteMapper}
         navigationBar={
-          <PropertyNavBar routeMapper={NavigationBarRouteMapper} />
+          <Navigator.NavigationBar
+            routeMapper={NavigationBarRouteMapper}
+            style={styles.navBar}
+          />
         }
-      />);
+      />
+    );
   }
 }
 
@@ -61,10 +96,48 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  messageText: {
+    fontSize: 17,
+    fontWeight: '500',
+    padding: 15,
+    marginTop: 50,
+    marginLeft: 15,
+  },
+  button: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#CDCDCD',
+  },
+  buttonText: {
+    fontSize: 17,
+    fontWeight: '500',
+  },
   navBar: {
+    backgroundColor: 'white',
+  },
+  navBarText: {
+    fontSize: 16,
+    marginVertical: 10,
+  },
+  navBarTitleText: {
+    color: cssVar('fbui-bluegray-60'),
+    fontWeight: '500',
+    marginVertical: 9,
+  },
+  navBarLeftButton: {
+    paddingLeft: 10,
+  },
+  navBarRightButton: {
+    paddingRight: 10,
+  },
+  navBarButtonText: {
+    color: cssVar('fbui-accent-blue'),
+  },
+  scene: {
     flex: 1,
-    height: 32,
-    backgroundColor: '#22d0ff',
+    paddingTop: 20,
+    backgroundColor: '#EAEAEA',
   },
 });
 
