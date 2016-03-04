@@ -13,8 +13,6 @@ var {
 
 var RouteMapper = require('./RouteMapper');
 
-var cssVar = require('cssVar');
-
 class NavButton extends React.Component {
   render() {
     return (
@@ -41,7 +39,7 @@ var NavigationBarRouteMapper = {
         onPress={() => navigator.pop()}
         style={styles.navBarLeftButton}>
         <Text style={[styles.navBarText, styles.navBarButtonText]}>
-          {previousRoute.title}
+          &lsaquo;{previousRoute.title}
         </Text>
       </TouchableOpacity>
     );
@@ -49,21 +47,12 @@ var NavigationBarRouteMapper = {
 
   RightButton: function(route, navigator, index, navState) {
     return null; 
-    //(
-      // <TouchableOpacity
-      //   onPress={() => navigator.push(newRandomRoute())}
-      //   style={styles.navBarRightButton}>
-      //   <Text style={[styles.navBarText, styles.navBarButtonText]}>
-      //     Next
-      //   </Text>
-      // </TouchableOpacity>
-    // );
   },
 
   Title: function(route, navigator, index, navState) {
     return (
       <Text style={[styles.navBarText, styles.navBarTitleText]}>
-        {route.title} [{index}]
+        {route.title}
       </Text>
     );
   },
@@ -96,13 +85,6 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  messageText: {
-    fontSize: 17,
-    fontWeight: '500',
-    padding: 15,
-    marginTop: 50,
-    marginLeft: 15,
-  },
   button: {
     backgroundColor: 'white',
     padding: 15,
@@ -121,7 +103,7 @@ var styles = StyleSheet.create({
     marginVertical: 10,
   },
   navBarTitleText: {
-    color: cssVar('fbui-bluegray-60'),
+    alignSelf: 'center',
     fontWeight: '500',
     marginVertical: 9,
   },
@@ -132,7 +114,7 @@ var styles = StyleSheet.create({
     paddingRight: 10,
   },
   navBarButtonText: {
-    color: cssVar('fbui-accent-blue'),
+    color: '#2222ff'
   },
   scene: {
     flex: 1,
