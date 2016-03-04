@@ -13,7 +13,7 @@ class FaqPage extends Component {
   render() {
     return (
       <View>
-        <Text>Frequently As Quacks</Text>
+        <Text>Frequently Asked Questions</Text>
       </View>
       );
   }

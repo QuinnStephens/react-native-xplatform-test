@@ -12,7 +12,9 @@ var {
   View,
 } = React;
 
-var ScrollableTabView = require('react-native-scrollable-tab-view');
+var PropertyTabBar = require('./PropertyTabBar');
+// var ScrollableTabView = require('react-native-scrollable-tab-view');
+import ScrollableTabView, { DefaultTabBar, ScrollableTabBar, } from 'react-native-scrollable-tab-view';
 var FaqPage = require('./FaqPage');
 var SearchPage = require('./SearchPage');
 var SearchResults = require('./SearchResults');
@@ -50,12 +52,8 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
 
   return (
     <ScrollableTabView 
-      renderTabBar = { () => 
-        <View style={styles.tabBar}>
-          <Text>Tab bar</Text>
-        </View>
-      }
-      >
+      tabBarPosition = "bottom"
+      renderTabBar = { () => <DefaultTabBar style={styles.tabBar}/> }>
       {content}
       <FaqPage tabLabel="FAQ" />
     </ScrollableTabView>
@@ -64,9 +62,8 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
 
 const styles = StyleSheet.create({
   tabBar: {
-    flex: 0.3,
-    height: 32,
-    backgroundColor: '#ff0000',
+    flex: 0.1,
+    backgroundColor: '#d0d0d0',
   }
 });
 

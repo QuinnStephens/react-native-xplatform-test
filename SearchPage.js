@@ -93,10 +93,10 @@ class SearchPage extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.description}>
-          Search for houses to eat!
+          Search for houses! But only in the UK.
         </Text>
         <Text style={styles.description}>
-          Search by place NAME, postcode or search NEAR UR LOCATION.
+          Search by place name, postcard, or near your location (if you're in the UK, otherwise you are out of luck, friend). 
         </Text>
         <View style={styles.flowRight}>
           <TextInput
@@ -132,7 +132,7 @@ var styles = StyleSheet.create({
   },
   container: {
     padding: 30,
-    marginTop: 65,
+    marginTop: 6,
     alignItems: 'center',
   },
   flowRight: {
